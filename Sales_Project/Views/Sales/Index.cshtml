@@ -1,0 +1,109 @@
+@model IEnumerable<SalesProject.Model.SalesModel>
+@section Styles{
+    <link rel="stylesheet" href="~/Views/Sales/site.css" asp-append-version="true" />
+
+
+}
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Supermarket Sales Data</h1>
+
+<p class="text-right">
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@if (ViewBag.Message != null)
+{
+
+    <p class="alert alert-success" role="alert">
+        @ViewBag.Message
+    </p>
+}
+
+
+<table class="table salesTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.invoice_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer_type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.datetime_of_purchase)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product_category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.branch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.unit_price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity_sold)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_sales_after_taxes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.payment_type)
+        </th>
+        <th></th>
+    </tr>
+
+
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.invoice_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer_type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.datetime_of_purchase)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.product_category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.branch)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.unit_price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity_sold)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total_sales_after_taxes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.payment_type)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.invoice_id }) |
+                    @*@Html.ActionLink("Details", "Detail", new { id = item.invoice_id }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.invoice_id })
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <td colspan="4" class="text-center"><b>No Data Available . Please Add Data By CLick On Create Button</b></td>
+    }
+</table>
