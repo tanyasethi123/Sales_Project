@@ -1,10 +1,10 @@
-@model SalesProject.Model.SalesModel
+@model SalesProject.Model.SalesViewModel
 
 @{
     ViewBag.Title = "Edit";
 }
-
-<p>Edit</p>
+<link rel="stylesheet" href="~/css/site.css" media="all" asp-append-version="true" />
+<h2>Edit Sale</h2>
 
 
 
@@ -21,86 +21,106 @@
 {
     @Html.AntiForgeryToken()
 
-    <p class="form-horizontal">
-    <p>Employee</p>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.invoice_id)
+     <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row formRow">
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.invoice_id, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.EditorFor(model => model.invoice_id, new { htmlAttributes = new { @class = "form-control inputSize", @disabled="disabled" } })
+                    @Html.ValidationMessageFor(model => model.invoice_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <p class="form-group">
-        @Html.LabelFor(model => model.invoice_id, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10" disabled>
-        @Html.EditorFor(model => model.invoice_id, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.invoice_id, "", new { @class = "text-danger" })
-    </p>
-    </p>
+            <div class=" col form-group columnStyle">
+                @Html.LabelFor(model => model.customer_type, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.DropDownListFor(model => model.customer_type,new SelectList(ViewBag.CustomerType),"Select Customer Type ", new { @class = "form-control inputSize" })
+                    @Html.ValidationMessageFor(model => model.customer_type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox"> 
+                    @Html.DropDownListFor(model => model.gender, new SelectList(ViewBag.Gender), "Select Gender ",new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
 
-    <p class="form-group">
-        @Html.LabelFor(model => model.location_id, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.EditorFor(model => model.location_id, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.location_id, "", new { @class = "text-danger" })
-    </p>
-    </p>
+        <div class="row formRow">
+            <div class=" col form-group columnStyle">
+                @Html.LabelFor(model => model.datetime_of_purchase, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.EditorFor(model => model.datetime_of_purchase, new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.datetime_of_purchase, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.product_category, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.DropDownListFor(model => model.product_id, new SelectList(ViewBag.Products,"product_id","product_category"), "Select Product Category ",
+                   new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.product_category, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.branch, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.DropDownListFor(model => model.location_id, new SelectList(ViewBag.Locations, "Value", "Text"), "Select Branch ",
+                   new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.branch, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
 
-    <p class="form-group">
-        @Html.LabelFor(model => model.product_id, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.EditorFor(model => model.product_id, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.product_id, "", new { @class = "text-danger" })
-    </p>
-    </p>
+    
+        <div class="row formRow">
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.unit_price, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.EditorFor(model => model.unit_price, new { htmlAttributes = new { @class = "form-control inputSize", @id = "unitPrice" } })
+                    @Html.ValidationMessageFor(model => model.unit_price, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <p class="form-group">
-        @Html.LabelFor(model => model.customer_id, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.EditorFor(model => model.customer_id, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.customer_id, "", new { @class = "text-danger" })
-    </p>
-    </p>
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.quantity_sold, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.EditorFor(model => model.quantity_sold, new { htmlAttributes = new { @class = "form-control inputSize", @id = "quantitySold" } })
+                    @Html.ValidationMessageFor(model => model.quantity_sold, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <p class="form-group">
-        @Html.LabelFor(model => model.date_id, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.EditorFor(model => model.date_id, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.date_id, "", new { @class = "text-danger" })
-    </p>
-    </p>
-    <p class="form-group">
-        @Html.LabelFor(model => model.unit_price, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.EditorFor(model => model.unit_price, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.unit_price, "", new { @class = "text-danger" })
-    </p>
-    </p>
-    <p class="form-group">
-        @Html.LabelFor(model => model.quantity_sold, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.EditorFor(model => model.quantity_sold, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.quantity_sold, "", new { @class = "text-danger" })
-    </p>
-    </p>
-    <p class="form-group">
-        @Html.LabelFor(model => model.total_sales_after_taxes, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.EditorFor(model => model.product_id, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.product_id, "", new { @class = "text-danger" })
-    </p>
-    </p>
-    <p class="form-group">
-        @Html.LabelFor(model => model.payment_type, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.EditorFor(model => model.payment_type, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.payment_type, "", new { @class = "text-danger" })
-    </p>
-    </p>
-    <p class="form-group">
-    <p class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Save" class="btn btn-default" />
-    </p>
-    </p>
-
-    </p>
+             <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.total_sales_after_taxes, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.EditorFor(model => model.total_sales_after_taxes, new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.total_sales_after_taxes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+  
+        <div class="row formRow">
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.payment_type, htmlAttributes: new { @class = "control-label " })
+                <div class="inputBox">
+                    @Html.DropDownListFor(model => model.payment_type, new SelectList(ViewBag.PaymentType), "Select Payment Type ",
+                                                new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.payment_type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row formRow">
+            <div class="col form-group columnStyle">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
 }
 
 <p>

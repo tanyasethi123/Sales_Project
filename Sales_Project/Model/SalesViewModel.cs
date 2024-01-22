@@ -2,7 +2,7 @@
 
 namespace SalesProject.Model
 {
-    public class SalesModel
+    public class SalesViewModel
     {
         [Key]
         [Display(Name ="Invoice ID")]
@@ -25,7 +25,7 @@ namespace SalesProject.Model
 
         public string? date_id { get; set; }
         [Display(Name = "Date")]
-        public DateTime datetime_of_purchase { get; set; }
+        public DateTime? datetime_of_purchase { get; set; }
 
         [Display(Name = "Unit Price")]
         public double unit_price { get; set; }
@@ -42,6 +42,29 @@ namespace SalesProject.Model
 
         [Display(Name = "Payment Type")]
         public string? payment_type { get; set; }
+
+
+
+        public SalesEntityModel InsertModel()
+        {
+            return new SalesEntityModel
+            {
+
+                invoice_id = this.invoice_id,
+                customer_id = this.customer_id,
+                date_id = this.date_id,
+                product_id = this.product_id,
+                location_id = this.location_id,
+                unit_price = this.unit_price,
+                quantity_sold = this.quantity_sold,
+                total_price_of_goods_sold = this.total_price_of_goods_sold,
+                tax_5_percent = this.tax_5_percent,
+                total_sales_after_taxes = this.total_sales_after_taxes,
+                payment_type = this.payment_type
+
+            };
+
+        }
 
     }
 

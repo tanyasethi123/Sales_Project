@@ -1,12 +1,14 @@
-@model IEnumerable<SalesProject.Model.SalesModel>
-@section Styles{
-    <link rel="stylesheet" href="~/Views/Sales/site.css" asp-append-version="true" />
+@model IEnumerable<SalesProject.Model.SalesViewModel>
 
 
-}
 @{
     ViewBag.Title = "Index";
 }
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Core.Common;
+
+<link rel="stylesheet" href="~/css/site.css" media="all" asp-append-version="true" />
 
 <h1>Supermarket Sales Data</h1>
 
@@ -14,6 +16,13 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+@using (Html.BeginForm("Index", "SalesController", FormMethod.Get))
+{
+    <p>
+        Find by Invoice Id: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
 @if (ViewBag.Message != null)
 {
 
@@ -23,25 +32,26 @@
 }
 
 
+
 <table class="table salesTable">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.invoice_id)
+            @Html.ActionLink("Invoice ID", "Index", new { sortOrder = ViewBag.InvoiceSortParam, currentFilter= ViewBag.CurrentFilter }, new { @class = "hyperlink" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.customer_type)
+            @Html.ActionLink("Customer Type", "Index", new { sortOrder = ViewBag.CustomerSortParm }, new { @class = "hyperlink" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.gender)
+            @Html.ActionLink("Gender", "Index", new { sortOrder = ViewBag.GenderSortParm }, new { @class = "hyperlink" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.datetime_of_purchase)
+            @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm }, new { @class = "hyperlink" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.product_category)
+            @Html.ActionLink("Product Category", "Index", new { sortOrder = ViewBag.ProductSortParm }, new { @class = "hyperlink" })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.branch)
+            @Html.ActionLink("Branch", "Index", new { sortOrder = ViewBag.BranchSortParm }, new { @class = "hyperlink" })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.unit_price)
@@ -55,7 +65,7 @@
         <th>
             @Html.DisplayNameFor(model => model.payment_type)
         </th>
-        <th></th>
+        <th>Actions</th>
     </tr>
 
 
@@ -107,3 +117,34 @@
         <td colspan="4" class="text-center"><b>No Data Available . Please Add Data By CLick On Create Button</b></td>
     }
 </table>
+<br />
+
+
+
+<div class="row">
+
+    @Html.PagedListPager((IPagedList)Model!, page => Url.Action("Index", new
+    {
+        page,
+        sortOrder = ViewBag.InvoiceSortParam,
+        currentFilter = ViewBag.CurrentFilter
+    }),
+    new PagedListRenderOptions
+    {
+        DisplayLinkToIndividualPages = true,
+        DisplayPageCountAndCurrentLocation = false,
+        MaximumPageNumbersToDisplay = 10,
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" },
+
+
+    })
+</div>
+@section Scripts{
+    <script>// Workaround to fix style of text for showing items .. through ..
+        // Problem related to Boostrap 4 according to issue in link below
+        // https://github.com/dncuug/X.PagedList/issues/127
+        $(document).ready(function () {
+            $('ul.pagination > li.disabled > a').addClass('page-link');
+        });</script>
+}

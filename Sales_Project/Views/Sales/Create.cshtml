@@ -1,10 +1,10 @@
-@model SalesProject.Model.SalesModel;
+@model SalesProject.Model.SalesViewModel;
 
 @{
     ViewBag.Title = "Create";
 }
 
-<h3>Create Sales</h3>
+<h2>Create Sale</h2>
 
 @if (ViewBag.Message != null)
 {
@@ -12,123 +12,115 @@
         @ViewBag.Message
     </p>
 }
-
+<link rel="stylesheet" href="~/css/site.css" media="all" asp-append-version="true" />
 
 @using (Html.BeginForm("Create", null, FormMethod.Post, new { enctype = "application/json" }))
 {
     @Html.AntiForgeryToken()
 
-    <p class="form-horizontal">
+    <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <p class="form-group">
-        @Html.LabelFor(model => model.invoice_id, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.EditorFor(model => model.invoice_id, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.invoice_id, "", new { @class = "text-danger" })
-    </p>
-    </p>
+        <div class="row formRow">
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.invoice_id, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.EditorFor(model => model.invoice_id, new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.invoice_id, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <p class="form-group">
-        @Html.LabelFor(model => model.customer_type, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.DropDownListFor(model => model.customer_type,new SelectList(ViewBag.CustomerType),"Select Customer Type ",
-                                    new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.customer_type, "", new { @class = "text-danger" })
-    </p>
-    </p>
+            <div class=" col form-group columnStyle">
+                @Html.LabelFor(model => model.customer_type, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.DropDownListFor(model => model.customer_type,new SelectList(ViewBag.CustomerType),"Select Customer Type ", new { @class = "form-control inputSize" })
+                    @Html.ValidationMessageFor(model => model.customer_type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox"> 
+                    @Html.DropDownListFor(model => model.gender, new SelectList(ViewBag.Gender), "Select Gender ",new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
 
-    <p class="form-group">
-        @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.DropDownListFor(model => model.gender, new SelectList(ViewBag.Gender), "Select Gender ",
-                                new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
-    </p>
-    </p>
+        <div class="row formRow">
+            <div class=" col form-group columnStyle">
+                @Html.LabelFor(model => model.datetime_of_purchase, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.EditorFor(model => model.datetime_of_purchase, new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.datetime_of_purchase, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.product_category, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.DropDownListFor(model => model.product_id, new SelectList(ViewBag.Products,"product_id","product_category"), "Select Product Category ",
+                   new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.product_category, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.branch, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.DropDownListFor(model => model.location_id, new SelectList(ViewBag.Locations, "Value", "Text"), "Select Branch ",
+                   new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.branch, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
 
-    <p class="form-group">
-        @Html.LabelFor(model => model.datetime_of_purchase, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.EditorFor(model => model.datetime_of_purchase, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.datetime_of_purchase, "", new { @class = "text-danger" })
-    </p>
-    </p>
+    
+        <div class="row formRow">
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.unit_price, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.EditorFor(model => model.unit_price, new { htmlAttributes = new { @class = "form-control inputSize", @id = "unitPrice" } })
+                    @Html.ValidationMessageFor(model => model.unit_price, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <p class="form-group">
-        @Html.LabelFor(model => model.product_category, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.DropDownListFor(model => model.product_category, new SelectList(ViewBag.Products,"product_id","product_category"), "Select Product Category ",
-       new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.product_category, "", new { @class = "text-danger" })
-    </p>
-    </p>
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.quantity_sold, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.EditorFor(model => model.quantity_sold, new { htmlAttributes = new { @class = "form-control inputSize", @id = "quantitySold" } })
+                    @Html.ValidationMessageFor(model => model.quantity_sold, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-    <p class="form-group">
-        @Html.LabelFor(model => model.branch, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.DropDownListFor(model => model.branch, new SelectList(ViewBag.Locations, "Value", "Text"), "Select Branch ",
-       new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.branch, "", new { @class = "text-danger" })
-    </p>
-    </p>
-
-    <p class="form-group">
-        @Html.LabelFor(model => model.unit_price, htmlAttributes: new { @class = "control-label col-md-2"})
-    <p class="col-md-10">
-        @Html.EditorFor(model => model.unit_price, new { htmlAttributes = new { @class = "form-control" , @id = "unitPrice" } })
-        @Html.ValidationMessageFor(model => model.unit_price, "", new { @class = "text-danger" })
-    </p>
-    </p>
-
-    <p class="form-group">
-        @Html.LabelFor(model => model.quantity_sold, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.EditorFor(model => model.quantity_sold, new { htmlAttributes = new { @class = "form-control" , @id = "quantitySold" } })
-        @Html.ValidationMessageFor(model => model.quantity_sold, "", new { @class = "text-danger" })
-    </p>
-    </p>
-    <p class="form-group">
-        @Html.LabelFor(model => model.total_sales_after_taxes, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.TextBoxFor(model => model.total_sales_after_taxes,
-       new { @class = "form-control" ,@readonly = "readonly", @id="totalSales"} )
-        @Html.ValidationMessageFor(model => model.total_sales_after_taxes, "", new { @class = "text-danger" })
-    </p>
-    </p>
-
-    <p class="form-group">
-        @Html.LabelFor(model => model.payment_type, htmlAttributes: new { @class = "control-label col-md-2" })
-    <p class="col-md-10">
-        @Html.DropDownListFor(model => model.payment_type, new SelectList(ViewBag.PaymentType), "Select Payment Type ",
-                                 new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.payment_type, "", new { @class = "text-danger" })
-    </p>
-    </p>
-    <p class="form-group">
-    <p class="col-md-offset-2 col-md-10">
-        <input type="submit" value="Create" class="btn btn-default" />
-    </p>
-    </p>
-    </p>
+             <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.total_sales_after_taxes, htmlAttributes: new { @class = "control-label" })
+                <div class="inputBox">
+                    @Html.EditorFor(model => model.total_sales_after_taxes, new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.total_sales_after_taxes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+  
+        <div class="row formRow">
+            <div class="col form-group columnStyle">
+                @Html.LabelFor(model => model.payment_type, htmlAttributes: new { @class = "control-label " })
+                <div class="inputBox">
+                    @Html.DropDownListFor(model => model.payment_type, new SelectList(ViewBag.PaymentType), "Select Payment Type ",
+                                                new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.ValidationMessageFor(model => model.payment_type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row formRow">
+            <div class="col form-group columnStyle">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+        
 }
 
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#unitPrice, #quantitySold").on("input", function () {
-
-            var unitPrice = parseFloat($("#unitPrice").val()) || 0;
-            var quantity = parseInt($("#quantity").val()) || 0;
-
-            // Calculate TotalSales with 5% tax
-            var totalSales = (unitPrice * quantity) + (unitPrice * quantity * 0.05);
-
-            // Update the TotalSales field
-            $("#totalSales").val(totalSales);
-        });
-    });
-</script>
