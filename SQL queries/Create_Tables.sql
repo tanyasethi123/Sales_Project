@@ -51,3 +51,41 @@ CREATE TABLE supermarket_customer
 );
 
 
+-- DROP TABLE IF EXISTS public.sales_fact;
+
+CREATE TABLE IF NOT EXISTS public.sales_fact
+(
+	
+    sales_fact_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    invoice_id character varying(15)  NOT NULL,
+    location_id character varying(20) ,
+    product_id character varying(20),
+    date_id character varying(20),
+    customer_id character varying(20),
+    unit_price numeric(7,2),
+    quantity_sold integer,
+    total_price_of_goods_sold numeric(8,2),
+    tax_5_percent numeric(10,2),
+    total_sales_after_taxes numeric(10,2),
+    payment_type character varying(15) ,
+    CONSTRAINT sales_fact_pkey PRIMARY KEY (sales_fact_id),
+    CONSTRAINT customer_fkey FOREIGN KEY (customer_id)
+        REFERENCES public.supermarket_customer (customer_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT date_fkey FOREIGN KEY (date_id)
+        REFERENCES public.supermarket_date (date_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT location_fkey FOREIGN KEY (location_id)
+        REFERENCES public.supermarket_location (location_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT product_fkey FOREIGN KEY (product_id)
+        REFERENCES public.supermarket_product (product_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+
+

@@ -28,7 +28,7 @@
             <div class="col form-group columnStyle">
                 @Html.LabelFor(model => model.invoice_id, htmlAttributes: new { @class = "control-label" })
                 <div class="inputBox">
-                    @Html.EditorFor(model => model.invoice_id, new { htmlAttributes = new { @class = "form-control inputSize", @disabled="disabled" } })
+                    @Html.EditorFor(model => model.invoice_id, new { htmlAttributes = new { @class = "form-control inputSize fieldDisabled", @readonly ="true" } })
                     @Html.ValidationMessageFor(model => model.invoice_id, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -99,7 +99,7 @@
              <div class="col form-group columnStyle">
                 @Html.LabelFor(model => model.total_sales_after_taxes, htmlAttributes: new { @class = "control-label" })
                 <div class="inputBox">
-                    @Html.EditorFor(model => model.total_sales_after_taxes, new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.EditorFor(model => model.total_sales_after_taxes, new { htmlAttributes = new { @class = "form-control inputSize fieldDisabled", @id = "totalSales", @readonly = "true" } })
                     @Html.ValidationMessageFor(model => model.total_sales_after_taxes, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -126,3 +126,19 @@
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
+<script>const unitPriceInput = document.getElementById('unitPrice');
+    const quantitySoldInput = document.getElementById('quantitySold');
+    const totalSalesSpan = document.getElementById('totalSales');
+    const updateTotalSales = () => {
+        const unitPrice = parseFloat(unitPriceInput.value) || 0;
+        const quantitySold = parseInt(quantitySoldInput.value) || 0;
+        const subTotal = unitPrice * quantitySold;
+        const totalSales = subTotal * 1.05; // Calculate total with tax
+        totalSalesSpan.value = totalSales.toFixed(2);
+    };
+
+    unitPriceInput.addEventListener('change', updateTotalSales);
+    quantitySoldInput.addEventListener('change', updateTotalSales);
+
+    // Call updateTotalSales on initial load to set the value
+    updateTotalSales();</script>

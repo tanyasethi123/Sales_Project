@@ -39,9 +39,13 @@ input[type=submit] {
     cursor: pointer;
 }
 
-.inputSize{
+.inputSize {
     height: 25px;
     width: 210px;
+}
+
+.fieldDisabled {
+    background-color: #e9e6e6;
 }
 
 select {

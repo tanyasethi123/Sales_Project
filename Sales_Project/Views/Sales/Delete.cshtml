@@ -11,12 +11,18 @@
     <hr />
 
     @using (Html.BeginForm())
-    {
+        {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+            <div class="form-actions no-color">
+                Invoice Id: &nbsp;
+                <b> @Html.DisplayFor(model => model.invoice_id) </b>
+                <br />
+                <br />
+                <input type="submit" value="Delete" class="btn btn-default" />
+                <br />
+                <br />
+                @Html.ActionLink("Back to List", "Index")
+            </div>
     }
 </div>

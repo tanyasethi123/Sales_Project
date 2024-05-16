@@ -5,6 +5,8 @@ namespace SalesProject.Model
     public class SalesViewModel
     {
         [Key]
+        public int sales_fact_id { get; set; }
+
         [Display(Name ="Invoice ID")]
         public string? invoice_id { get; set; }
 
@@ -38,12 +40,11 @@ namespace SalesProject.Model
         public double tax_5_percent { get; set; }
 
         [Display(Name = "Total Sales After Taxes(5%)")]
-        public double total_sales_after_taxes { get; set; }
+        public double total_sales_after_taxes {  get; set;}
 
         [Display(Name = "Payment Type")]
         public string? payment_type { get; set; }
-
-
+        
 
         public SalesEntityModel InsertModel()
         {

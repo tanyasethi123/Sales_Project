@@ -47,6 +47,7 @@ namespace SalesProject.Controllers
                            
                             select new SalesViewModel
                             {
+                                sales_fact_id = sf.sales_fact_id,
                                 invoice_id = sf.invoice_id,
                                 location_id = sf.location_id,
                                 branch = sl.branch,
@@ -116,7 +117,7 @@ namespace SalesProject.Controllers
                     selquery = (IQueryable<SalesViewModel>)selquery.OrderBy(s => s.branch);
                     break;
                 default:
-                    selquery = (IQueryable<SalesViewModel>)selquery.OrderBy(s => s.invoice_id);
+                    selquery = (IQueryable<SalesViewModel>)selquery.OrderByDescending(s => s.sales_fact_id);
                     break;
             }
             int pageSize = 15;
@@ -299,9 +300,11 @@ namespace SalesProject.Controllers
 
         // GET: Sales/Delete/5
         [HttpGet("Delete")]
-        public ActionResult Delete()
+        public ActionResult Delete(string id)
         {
-            return View();
+            var salesModel = new SalesViewModel();
+            salesModel.invoice_id = id;
+            return View(salesModel);
         }
 
         // POST: Sales/Delete/5

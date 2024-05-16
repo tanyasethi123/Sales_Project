@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Create";
 }
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <h2>Create Sale</h2>
 
@@ -33,15 +34,15 @@
             <div class=" col form-group columnStyle">
                 @Html.LabelFor(model => model.customer_type, htmlAttributes: new { @class = "control-label" })
                 <div class="inputBox">
-                    @Html.DropDownListFor(model => model.customer_type,new SelectList(ViewBag.CustomerType),"Select Customer Type ", new { @class = "form-control inputSize" })
+                    @Html.DropDownListFor(model => model.customer_type, new SelectList(ViewBag.CustomerType), "Select Customer Type ", new { @class = "form-control inputSize" })
                     @Html.ValidationMessageFor(model => model.customer_type, "", new { @class = "text-danger" })
                 </div>
             </div>
-        
+
             <div class="col form-group columnStyle">
                 @Html.LabelFor(model => model.gender, htmlAttributes: new { @class = "control-label" })
-                <div class="inputBox"> 
-                    @Html.DropDownListFor(model => model.gender, new SelectList(ViewBag.Gender), "Select Gender ",new { htmlAttributes = new { @class = "form-control inputSize" } })
+                <div class="inputBox">
+                    @Html.DropDownListFor(model => model.gender, new SelectList(ViewBag.Gender), "Select Gender ", new { htmlAttributes = new { @class = "form-control inputSize" } })
                     @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -55,16 +56,16 @@
                     @Html.ValidationMessageFor(model => model.datetime_of_purchase, "", new { @class = "text-danger" })
                 </div>
             </div>
-        
+
             <div class="col form-group columnStyle">
                 @Html.LabelFor(model => model.product_category, htmlAttributes: new { @class = "control-label" })
                 <div class="inputBox">
-                    @Html.DropDownListFor(model => model.product_id, new SelectList(ViewBag.Products,"product_id","product_category"), "Select Product Category ",
+                    @Html.DropDownListFor(model => model.product_id, new SelectList(ViewBag.Products, "product_id", "product_category"), "Select Product Category ",
                    new { htmlAttributes = new { @class = "form-control inputSize" } })
                     @Html.ValidationMessageFor(model => model.product_category, "", new { @class = "text-danger" })
                 </div>
             </div>
-        
+
             <div class="col form-group columnStyle">
                 @Html.LabelFor(model => model.branch, htmlAttributes: new { @class = "control-label" })
                 <div class="inputBox">
@@ -75,7 +76,7 @@
             </div>
         </div>
 
-    
+
         <div class="row formRow">
             <div class="col form-group columnStyle">
                 @Html.LabelFor(model => model.unit_price, htmlAttributes: new { @class = "control-label" })
@@ -93,15 +94,15 @@
                 </div>
             </div>
 
-             <div class="col form-group columnStyle">
+            <div class="col form-group columnStyle">
                 @Html.LabelFor(model => model.total_sales_after_taxes, htmlAttributes: new { @class = "control-label" })
                 <div class="inputBox">
-                    @Html.EditorFor(model => model.total_sales_after_taxes, new { htmlAttributes = new { @class = "form-control inputSize" } })
+                    @Html.EditorFor(model => model.total_sales_after_taxes, new { htmlAttributes = new { @class = "form-control inputSize fieldDisabled", @id = "totalSales", @readonly = "true" } })
                     @Html.ValidationMessageFor(model => model.total_sales_after_taxes, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
-  
+
         <div class="row formRow">
             <div class="col form-group columnStyle">
                 @Html.LabelFor(model => model.payment_type, htmlAttributes: new { @class = "control-label " })
@@ -118,9 +119,26 @@
             </div>
         </div>
     </div>
-        
+
 }
 
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
+<script>const unitPriceInput = document.getElementById('unitPrice');
+    const quantitySoldInput = document.getElementById('quantitySold');
+    const totalSalesSpan = document.getElementById('totalSales');
+    const updateTotalSales = () => {
+        const unitPrice = parseFloat(unitPriceInput.value) || 0;
+        const quantitySold = parseInt(quantitySoldInput.value) || 0;
+        const subTotal = unitPrice * quantitySold;
+        const totalSales = subTotal * 1.05; // Calculate total with tax
+        totalSalesSpan.value = totalSales.toFixed(2);
+    };
+
+    unitPriceInput.addEventListener('change', updateTotalSales);
+    quantitySoldInput.addEventListener('change', updateTotalSales);
+
+    // Call updateTotalSales on initial load to set the value
+    updateTotalSales();
+ </script>
