@@ -26,3 +26,8 @@ select * from supermarket_location where location_id= 'LOC_2';
 select * from supermarket_product where product_id= 'PROD_1';
 select * from supermarket_date where date_id= 'DATE_875';
 select * from supermarket_customer where customer_id= 'CUST_1';
+
+
+
+ALTER TABLE sales_fact
+ADD sales_fact_id integer; 

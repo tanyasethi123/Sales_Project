@@ -394,5 +394,25 @@ namespace SalesProject.Controllers
             ViewBag.PaymentType = payment_type;
 
         }
+
+        // GET: Sales/Analyze
+        [HttpGet("Analyze")]
+        public ActionResult Analyze()
+        {
+            ViewModelList viewModelList = new ViewModelList();
+            if (_context.total_sales_and_rating_by_product_category == null)
+            {
+                return Problem("Entity set 'AppDbContext.total_sales_and_rating_by_product_category'  is null.");
+            }
+            var analyze1 = _context.total_sales_and_rating_by_product_category
+            .FromSqlRaw("SELECT * FROM total_sales_and_rating_by_product_category()")
+            .ToList();
+            viewModelList.TotalSalesByProductCategories = analyze1;
+            var analyze2 = _context.monthlySales
+            .FromSqlRaw("SELECT * FROM get_monthly_sales()")
+            .ToList();
+            viewModelList.MonthlySales = analyze2;
+            return View(viewModelList);
+        }
     }
     }

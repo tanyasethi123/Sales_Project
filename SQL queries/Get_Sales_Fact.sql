@@ -19,6 +19,8 @@ Join supermarket_location sl On sf.location_id= sl.location_id
 Join supermarket_product sp On sf.product_id = sp.product_id
 Join supermarket_date sd On sf.date_id = sd.date_id
 Join supermarket_customer sc On sf.customer_id= sc.customer_id
+order by sf.invoice_id desc
 
 select * from supermarket_date where datetime_of_purchase= '2019-02-06 10:22:00'
 
+alter table sales_fact alter column sales_fact_id after invoice_id;

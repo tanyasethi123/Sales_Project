@@ -15,6 +15,9 @@ namespace SalesProject
         public DbSet<DateModel> supermarket_date { get; set; }
         public DbSet<ProductModel> supermarket_product { get; set; }
         public DbSet<Identity> DemoTable { get; set; }
+        public DbSet<TotalSalesByProductCategory> total_sales_and_rating_by_product_category { get; set; }
+        public DbSet<MonthlySales> monthlySales { get; set; }
+
 	}
 }
 

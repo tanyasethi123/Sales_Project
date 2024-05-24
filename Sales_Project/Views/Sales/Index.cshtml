@@ -10,11 +10,13 @@
 
 <link rel="stylesheet" href="~/css/site.css" media="all" asp-append-version="true" />
 
-<h1>Supermarket Sales Data</h1>
+<h1 style="text-align:center">Supermarket Sales Data</h1>
 
-<p class="text-right">
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div>
+   @Html.ActionLink("Create New", "Create", new { },new { @class= "navigate-item" })
+    @Html.ActionLink("Analyze Data", "Analyze", new { }, new { @class = "navigate-item" })
+
+</div>
 
 @using (Html.BeginForm("Index", "SalesController", FormMethod.Get))
 {
@@ -36,7 +38,7 @@
 <table class="table salesTable">
     <tr>
         <th>
-            @Html.ActionLink("Invoice ID", "Index", new { sortOrder = ViewBag.InvoiceSortParam, currentFilter= ViewBag.CurrentFilter }, new { @class = "hyperlink" })
+            @Html.ActionLink("Invoice ID", "Index", new { sortOrder = ViewBag.InvoiceSortParam, currentFilter = ViewBag.CurrentFilter }, new { @class = "hyperlink" })
         </th>
         <th>
             @Html.ActionLink("Customer Type", "Index", new { sortOrder = ViewBag.CustomerSortParm }, new { @class = "hyperlink" })
@@ -117,8 +119,6 @@
         <td colspan="4" class="text-center"><b>No Data Available . Please Add Data By CLick On Create Button</b></td>
     }
 </table>
-<br />
-
 
 
 <div class="row">

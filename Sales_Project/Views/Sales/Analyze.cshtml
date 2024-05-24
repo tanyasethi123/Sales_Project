@@ -1,0 +1,133 @@
+﻿@model SalesProject.Model.ViewModelList;
+
+@{
+    ViewBag.Title = "Analyze";
+}
+<link rel="stylesheet" href="~/css/site.css" media="all" asp-append-version="true" />
+<h2> Analyze Data</h2>
+<br />
+<br />
+
+<div class="blockContainer">
+
+    <div class="blockItem leftBlock" id="productLine">
+        Total Sales By Product Category
+    </div>
+
+    <div class="blockItem rightBlock" id="monthlySales">
+        Monthly Sales
+    </div>
+
+</div>
+
+<!-- The Product Line Modal -->
+<div id="productLineModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" id="closePL">&times;</span>
+        <div class="modal-heading"> Total Sales By Product Category</div>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product Line</th>
+                        <th>Total Sales</th>
+                        <th>Average Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.TotalSalesByProductCategories)
+                    {
+                        <tr>
+                            <td>@item.product_category</td>
+                            <td>@item.total_sales</td>
+                            <td>@item.average_rating</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- The Monthly Sales Modal -->
+<div id="monthlySalesModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close" id="closeM">&times;</span>
+        <div class="modal-heading"> Total Sales Per Month</div>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Month - Year</th>
+                        <th>Total Sales</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.MonthlySales)
+                    {
+                        <tr>
+                            <td>@item.month_year</td>
+                            <td>@item.total_sales</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    //product category
+    var productLineModal = document.getElementById("productLineModal");
+    var productLine = document.getElementById("productLine");
+    var closePLModal = document.getElementById("closePL");
+
+    //monthly sales
+    var monthlySalesModal = document.getElementById("monthlySalesModal");
+    var monthlySales = document.getElementById("monthlySales");
+    var closeMModal = document.getElementById("closeM");
+
+
+    // open the modal
+    productLine.onclick = function () {
+        productLineModal.style.display = "block";
+    }
+
+    // close the modal
+    closePLModal.onclick = function () {
+        productLineModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == productLineModal) {
+            productLineModal.style.display = "none";
+        }
+    }
+
+    // open the monthly modal
+    monthlySales.onclick = function () {
+        monthlySalesModal.style.display = "block";
+    }
+
+    // close the modal
+    closeMModal.onclick = function () {
+        monthlySalesModal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == monthlySalesModal) {
+            monthlySalesModal.style.display = "none";
+        }
+    }
+</script>
+

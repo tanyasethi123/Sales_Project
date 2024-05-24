@@ -1,6 +1,19 @@
 ﻿body {
 }
+.navigate {
+    background-color: #a7a3a3;
+    height: 40px;
+    align-content: center;
+}
 
+.navigate-item {
+    padding: 10px;
+    font-size: 18px;
+    color: white;
+    border-radius: 9px;
+    background-color: #907878;
+    text-decoration:none;
+}
 .salesTable{
     width: 100%;
 }
@@ -67,6 +80,7 @@ a.hyperlink{
     list-style: none;
     padding: 0;
     gap: .625rem;
+    margin-top: 2px;
 }
 
 .page-item, .page-link {
@@ -83,3 +97,76 @@ a.hyperlink{
     flex: 1;
     // expands the div to max available width
 }
+
+.blockContainer {
+    height: 400px;
+    align-content: center;
+    display: flex;
+    background-color: #ece6e6;
+}
+
+.blockItem {
+    margin: 20px;
+    width: 50vw;
+    font-size: 42px;
+    align-content: center;
+    text-align: center;
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.51);
+    transition: 0.3s;
+    border-radius: 50px;
+}
+.blockItem:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.51);
+ }
+.leftBlock {
+    float: left;
+    background: #2e85d5;
+
+}
+.rightBlock {
+    float: right;
+    background: cadetblue;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 40px;
+    padding-top: 20px;
+    border: 1px solid #888;
+    width: fit-content;
+}
+.modal-heading {
+    text-align: center;
+    font-size: x-large;
+    margin-bottom: 25px;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
